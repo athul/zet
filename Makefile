@@ -13,7 +13,7 @@ deps:
 	go get -u github.com/knadh/stuffbin/...
 
 build:
-	go build -o ${BIN} -ldflags="-X 'main.buildVersion=${VERSION}' -X 'main.buildDate=${BUILD_DATE}'" ./cmd/zettel/
+	go build -o ${BIN} -ldflags="-s -w -X 'main.buildVersion=${VERSION}' -X 'main.buildDate=${BUILD_DATE}'" ./cmd/zettel/
 	stuffbin -a stuff -in ${BIN} -out ${BIN} ${STATIC}
 
 test-local:
