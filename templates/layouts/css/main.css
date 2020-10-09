@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 body {
 	background: rgba(0, 0, 0, 0) url("../images/dot-grid.png") repeat scroll 0% 0%;
 	color: #202020;
@@ -13,7 +15,7 @@ a,button {
 	cursor: pointer;
 }
 
-navbar {
+/* navbar {
 	margin-top: 5rem;
 }
 
@@ -26,7 +28,7 @@ navbar {
 	cursor: pointer;
 	color: #4d4a4a;
 	border: none;
-}
+} */
 
 
 /* === Footer === */
@@ -85,4 +87,30 @@ pre {
 img{
 	height: auto;
 	max-width: 100%;
+}
+.nav,.nav-brand,.nav-menu{
+	display:flex;
+}
+.nav{
+	position:relative;
+	flex-wrap:wrap;
+	align-items:center;
+	padding:1rem;
+}
+.nav-menu{
+	flex-flow:row;
+	flex:1 0 auto;
+}
+.nav-item{
+	padding:1rem 2rem;
+}
+.nav-logo{
+	font-weight:bolder;
+	font-size:2rem;
+	line-height:0;
+
+}
+.horizontal-align{
+	display:flex;
+	justify-content:center;
 }

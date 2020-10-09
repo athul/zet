@@ -101,7 +101,7 @@ func ReplaceLinks(posts []Post, sitePrefix string) error {
 				return fmt.Errorf("link to an invalid slug: %s", sg)
 			}
 
-			link := fmt.Sprintf(`[%s](%s/posts/%s.html)`, meta.Title, sitePrefix, sg)
+			link := fmt.Sprintf(`[%s](/%s/posts/%s.html)`, meta.Title, sitePrefix, sg)
 
 			// Replace the slug with a link
 			posts[i].Body = strings.ReplaceAll(posts[i].Body, m, link)

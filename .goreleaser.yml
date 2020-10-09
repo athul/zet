@@ -4,8 +4,6 @@ env:
 builds:
   - binary: zettel
     goos:
-      - windows
-      - darwin
       - linux
     goarch:
       - amd64
