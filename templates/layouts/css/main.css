@@ -1,10 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/jetbrains-mono.min.css");
 
-body {
-	background: rgba(0, 0, 0, 0) url("../images/dot-grid.png") repeat scroll 0% 0%;
-	color: #202020;
-	font-family: 'Inter', sans-serif;
-}
 
 .container {
 	max-width: 960px;
@@ -14,22 +9,6 @@ body {
 a,button {
 	cursor: pointer;
 }
-
-/* navbar {
-	margin-top: 5rem;
-}
-
-.nav-item a {
-	color: #797979;
-	text-decoration: none;
-}
-
-.nav-item a:hover {
-	cursor: pointer;
-	color: #4d4a4a;
-	border: none;
-} */
-
 
 /* === Footer === */
 
@@ -75,42 +54,25 @@ footer {
 .date {
 	color: #9b9b9b;
 }
-pre {
-	border-radius: 4px;
-	overflow: auto;
-	padding: .5rem 1rem;
-	margin:0 .2rem;
-	font-size:90%;
-	white-space: pre-wrap;
-	font-family:Consolas,Monaco,Menlo,monospace;
-}
 img{
 	height: auto;
 	max-width: 100%;
 }
-.nav,.nav-brand,.nav-menu{
+
+.nav-item{
 	display:flex;
-}
-.nav{
 	position:relative;
 	flex-wrap:wrap;
 	align-items:center;
 	padding:1rem;
-}
-.nav-menu{
-	flex-flow:row;
-	flex:1 0 auto;
-}
-.nav-item{
 	padding:1rem 2rem;
 }
-.nav-logo{
-	font-weight:bolder;
-	font-size:2rem;
-	line-height:0;
 
-}
 .horizontal-align{
 	display:flex;
 	justify-content:center;
+}
+pre {
+	font-family: 'Jetbrains Mono',monospace !important;
+	overflow: scroll;
 }
