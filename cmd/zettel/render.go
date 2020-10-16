@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -127,4 +128,19 @@ func (hub *Hub) renderGraphData(graphData GraphData) error {
 	tmplContext := getInitialTmplContext(hub.Config)
 
 	return saveResource("graph", tmpls, file, tmplContext, hub.Fs)
+}
+func (hub *Hub) renderSearchIndex(searchIndex []PostData) error {
+	path := filepath.Join(defaultDistDir, "data", "search.json")
+
+	file, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+
+	if err = json.NewEncoder(file).Encode(&searchIndex); err != nil {
+		log.Println("File Created alla")
+		return err
+	}
+
+	return nil
 }
