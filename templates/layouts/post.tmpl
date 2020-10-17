@@ -16,9 +16,16 @@
             <ul>
                 {{- range .Post.Connections}}
                     {{- if eq .Slug "index"}}
-                        <li><a href="/{{$.SitePrefix}}/">{{.Title}}</a></li>
-                    {{- else}}
-                        <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                        {{- if $.SitePrefix}}
+                            <li><a href="/{{$.SitePrefix}}">{{.Title}}</a></li>
+                        {{- else}}
+                            <li><a href="/">{{.Title}}</a></li>
+                        {{- end}}
+                        {{- if $.SitePrefix}}
+                            <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                        {{- else}}
+                            <li><a href="/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                        {{- end}}
                     {{- end}}    
                 {{- end}}
             </ul>

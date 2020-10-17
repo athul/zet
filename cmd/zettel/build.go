@@ -28,6 +28,7 @@ func (hub *Hub) makeDist() error {
 	dirs := []string{
 		defaultDistDir,
 		path.Join(defaultDistDir, "css"),
+		path.Join(defaultDistDir, "js"),
 		path.Join(defaultDistDir, "images"),
 		path.Join(defaultDistDir, "posts"),
 		path.Join(defaultDistDir, "tags"),
@@ -43,6 +44,7 @@ func (hub *Hub) makeDist() error {
 	// Copy css, images folders to dist directory
 	globs := map[string]string{
 		"/templates/layouts/css/*":    path.Join(defaultDistDir, "css"),
+		"/templates/layouts/js/*":     path.Join(defaultDistDir, "js"),
 		"/templates/layouts/images/*": path.Join(defaultDistDir, "images"),
 		"/templates/layouts/data/*":   path.Join(defaultDistDir, "data"),
 	}
@@ -190,6 +192,10 @@ func (hub *Hub) build(cliCtx *cli.Context) error {
 
 	// Render graph.json
 	gd := MakeGraphData(posts, g)
-
+	// Render search.json
+	searchIndex := GenerateSearchIndex(posts)
+	if err = hub.renderSearchIndex(searchIndex); err != nil {
+		return err
+	}
 	return hub.renderGraphData(gd)
 }

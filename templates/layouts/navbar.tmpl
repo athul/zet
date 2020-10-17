@@ -1,8 +1,20 @@
 {{ define "navbar" }}
 
 <navbar class="horizontal-align">
-    <div class="nav-item"><a href="/{{.SitePrefix}}/">Home</a></div>
-    <div class="nav-item"><a href="/{{.SitePrefix}}/all.html">All Zettels</a></div>
-    <div class="nav-item"><a href="/{{.SitePrefix}}/graph.html">Graph</a></div>
+    {{ if $.SitePrefix}}
+        <div class="nav-item"><a href="/{{$.SitePrefix}}/">വീട്</a></div>
+        <div class="nav-item"><a href="/{{$.SitePrefix}}/all.html">കുറിപ്പുകൾ</a></div>
+        <div class="nav-item"><a href="/{{$.SitePrefix}}/graph.html">ഗ്രാഫ്‌</a></div>
+    {{else}}
+        <div class="nav-item"><a href="/">വീട്</a></div>
+        <div class="nav-item"><a href="/all.html">കുറിപ്പുകൾ</a></div>
+        <div class="nav-item"><a href="/graph.html">ഗ്രാഫ്‌</a></div>
+    {{end}}
+    <div class="nav-item">
+        <div id="fastSearch">
+            <input id="searchInput" tabindex="0" autocomplete="off" placeholder="Search..." type="search">
+            <ul id="searchResults"></ul>
+        </div>
+    </div>
 </navbar>
 {{- end }}
