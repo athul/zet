@@ -12,7 +12,7 @@
 
 {{- if .Post.Connections}}
     <section class="container link">
-        <h3>Connections</h3>
+        <h4>Connections</h4>
             <ul>
                 {{- range .Post.Connections}}
                     {{- if eq .Slug "index"}}
@@ -24,9 +24,10 @@
             </ul>
     </section>
 {{- end}}
-
+<hr>
 {{- if .Post.Meta.Tags}}
     <section class="container tags">
+    <super>Tags:</super>
         {{- range $t := .Post.Meta.Tags}}
             <a href="/{{$.SitePrefix}}/tags/{{$t}}.html"><button class='outline'>{{$t}}</button></a>
         {{- end}}
