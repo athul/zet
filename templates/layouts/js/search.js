@@ -1,126 +1,54 @@
 // Code by Craig Mod under MIT License
 // https://gist.github.com/cmod/5410eae147e4318164258742dd053993
+var fuse, searchVisible = !1,
+    firstRun = !0,
+    list = document.getElementById("searchResults"),
+    first = list.firstChild,
+    last = list.lastChild,
+    maininput = document.getElementById("searchInput"),
+    resultsAvailable = !1,
+    baseURL = window.location.pathname.split("/")[1]
 
-var fuse; // holds our search engine
-var searchVisible = false;
-var firstRun = true; // allow us to delay loading json data unless search activated
-var list = document.getElementById('searchResults'); // targets the <ul>
-var first = list.firstChild; // first child of search list
-var last = list.lastChild; // last child of search list
-var maininput = document.getElementById('searchInput'); // input box for search
-var resultsAvailable = false; // Did we get any search results?
-
-// ==========================================
-// The main keyboard event listener running the show
-//
-if (firstRun) {
-    loadSearch(); // loads our json data and builds fuse.js search index
-    firstRun = false; // let's never do this again
+if (baseURL.length === 0 || baseURL.includes("html")) {
+    baseURL = window.location.origin
+} else {
+    baseURL = "/" + baseURL
 }
-if (!searchVisible) {
-    document.getElementById("fastSearch").style.visibility = "visible"; // show search box
-    document.getElementById("searchInput").focus(); // put focus in input box so you can just start typing
-    searchVisible = true; // search visible
-}
-document.addEventListener('keydown', function (event) {
-    if (event.keyCode == 27) {
-          document.activeElement.blur();
-      }
-    // DOWN (40) arrow
-    if (event.keyCode == 40) {
-        if (searchVisible && resultsAvailable) {
-            console.log("down");
-            event.preventDefault(); // stop window from scrolling
-            if (document.activeElement == maininput) { first.focus(); } // if the currently focused element is the main input --> focus the first <li>
-            else if (document.activeElement == last) { last.focus(); } // if we're at the bottom, stay there
-            else { document.activeElement.parentElement.nextSibling.firstElementChild.focus(); } // otherwise select the next search result
+function fetchJSONFile(e, t) {
+    var n = new XMLHttpRequest;
+    n.onreadystatechange = function () {
+        if (4 === n.readyState && 200 === n.status) {
+            var e = JSON.parse(n.responseText);
+            t && t(e)
         }
-    }
-
-    // UP (38) arrow
-    if (event.keyCode == 38) {
-        if (searchVisible && resultsAvailable) {
-            event.preventDefault(); // stop window from scrolling
-            if (document.activeElement == maininput) { maininput.focus(); } // If we're in the input box, do nothing
-            else if (document.activeElement == first) { maininput.focus(); } // If we're at the first item, go to input box
-            else { document.activeElement.parentElement.previousSibling.firstElementChild.focus(); } // Otherwise, select the search result above the current active one
-        }
-    }
-});
-
-
-// ==========================================
-// execute search as each character is typed
-//
-document.getElementById("searchInput").onkeyup = function (e) {
-    executeSearch(this.value);
+    }, n.open("GET", e), n.send()
 }
 
-
-// ==========================================
-// fetch some json without jquery
-//
-function fetchJSONFile(path, callback) {
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState === 4) {
-            if (httpRequest.status === 200) {
-                var data = JSON.parse(httpRequest.responseText);
-                if (callback) callback(data);
-            }
-        }
-    };
-    httpRequest.open('GET', path);
-    httpRequest.send();
-}
-
-
-// ==========================================
-// load our search index, only executed once
-// on first call of search box (CMD-/)
-//
 function loadSearch() {
-    fetchJSONFile('data/search.json', function (data) {
-
-        var options = { // fuse.js options; check fuse.js website for details
-            shouldSort: true,
+    fetchJSONFile(baseURL + "/data/search.json", function (e) {
+        fuse = new Fuse(e, {
+            shouldSort: !0,
             location: 0,
             distance: 100,
-            threshold: 0.4,
+            threshold: .4,
             minMatchCharLength: 2,
-            keys: [
-                'title',
-                'tags'
-            ]
-        };
-        console.log(data)
-        fuse = new Fuse(data, options); // build the index from the json file
-    });
+            keys: ["title", "tags"]
+        })
+    })
 }
 
-
-// ==========================================
-// using the index we loaded on CMD-/, run 
-// a search query (for "term") every time a letter is typed
-// in the search box
-//
-function executeSearch(term) {
-    let results = fuse.search(term); // the actual query being run using fuse.js
-    let searchitems = ''; // our results bucket
-
-    if (results.length === 0) { // no results based on what was typed into the input box
-        resultsAvailable = false;
-        searchitems = '';
-    } else { // build our html 
-        for (let item in results.slice(0, 5)) { // only show first 5 results
-            searchitems = searchitems + '<li><a href="' + window.location.href + results[item].permalink + '" tabindex="0">' + '<span class="title">' + results[item].title + '</span> — ' + results[item].tags + '</a></li>';
-        }
-        resultsAvailable = true;
+function executeSearch(e) {
+    let t = fuse.search(e),
+        n = "";
+    if (0 === t.length) resultsAvailable = !1, n = "";
+    else {
+        for (let e in t.slice(0, 5)) n = n + '<li><a href="' + baseURL + '/' + t[e].permalink + '" tabindex="0"><span class="title">' + t[e].title + "</span> — " + t[e].tags + "</a></li>";
+        resultsAvailable = !0
     }
-
-    document.getElementById("searchResults").innerHTML = searchitems;
-    if (results.length > 0) {
-        first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
-        last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
-    }
+    document.getElementById("searchResults").innerHTML = n, t.length > 0 && (first = list.firstChild.firstElementChild, last = list.lastChild.firstElementChild)
 }
+firstRun && (loadSearch(), firstRun = !1), searchVisible || (document.getElementById("searchInput").focus(), searchVisible = !0), document.addEventListener("keydown", function (e) {
+    27 == e.keyCode && document.activeElement.blur(), 40 == e.keyCode && searchVisible && resultsAvailable && (e.preventDefault(), document.activeElement == maininput ? first.focus() : document.activeElement == last ? last.focus() : document.activeElement.parentElement.nextSibling.firstElementChild.focus()), 38 == e.keyCode && searchVisible && resultsAvailable && (e.preventDefault(), document.activeElement == maininput ? maininput.focus() : document.activeElement == first ? maininput.focus() : document.activeElement.parentElement.previousSibling.firstElementChild.focus())
+}), document.getElementById("searchInput").onkeyup = function (e) {
+    executeSearch(this.value)
+};

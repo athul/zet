@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -138,7 +137,6 @@ func (hub *Hub) renderSearchIndex(searchIndex []PostData) error {
 	}
 
 	if err = json.NewEncoder(file).Encode(&searchIndex); err != nil {
-		log.Println("File Created alla")
 		return err
 	}
 

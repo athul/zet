@@ -8,14 +8,17 @@ import (
 	"github.com/hackstream/zettel/internal/pipeline"
 )
 
-// PostData holds the data of a Post. Used for Indexing in Search
+// PostData holds the data of a Post. Used for Indexing in Search. Has 3 keys,
+// the Title of the page
+// the Tags of the page if available
+// the Permalink/Link of the Page
 type PostData struct {
 	Title     string   `json:"title"`
 	Permalink string   `json:"permalink"`
 	Tags      []string `json:"tags"`
 }
 
-// GenerateSearchIndex creates a index file for search functionality
+// GenerateSearchIndex creates a index file(JSON) for search functionality
 func GenerateSearchIndex(posts []pipeline.Post) []PostData {
 	indexData := make([]PostData, 0)
 	for _, post := range posts {

@@ -10,11 +10,6 @@
             <section class="hero container">
                <h1>{{.SiteName}}</h1>
                <h5>{{.Description}}</h5><br/>
-               <span>
-               <div id="fastSearch">
-               Search : <input id="searchInput" tabindex="0" autocomplete="off"><span/>
-               <ul id="searchResults"></ul>
-               </div>
             </section>
             {{- end}}
             {{- template "post" . }}
@@ -22,9 +17,5 @@
          {{- template "footer" . }}
       </div>
    </body>
-   {{- if .IsIndex}}
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
-   <script src="js/search.min.js"></script>
-   {{- end}}
 </html>
 {{- end }}

@@ -43,10 +43,10 @@ func (hub *Hub) makeDist() error {
 
 	// Copy css, images folders to dist directory
 	globs := map[string]string{
-		"/templates/layouts/css/*":       path.Join(defaultDistDir, "css"),
-		"/templates/layouts/js/*.min.js": path.Join(defaultDistDir, "js"),
-		"/templates/layouts/images/*":    path.Join(defaultDistDir, "images"),
-		"/templates/layouts/data/*":      path.Join(defaultDistDir, "data"),
+		"/templates/layouts/css/*":    path.Join(defaultDistDir, "css"),
+		"/templates/layouts/js/*":     path.Join(defaultDistDir, "js"),
+		"/templates/layouts/images/*": path.Join(defaultDistDir, "images"),
+		"/templates/layouts/data/*":   path.Join(defaultDistDir, "data"),
 	}
 
 	for g, dir := range globs {
@@ -80,7 +80,7 @@ func (hub *Hub) build(cliCtx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	sIndex := GenerateSearchIndex(posts)
+
 	if err = pipeline.ReplaceLinks(posts, hub.Config.SitePrefix); err != nil {
 		return err
 	}
@@ -192,7 +192,9 @@ func (hub *Hub) build(cliCtx *cli.Context) error {
 
 	// Render graph.json
 	gd := MakeGraphData(posts, g)
-	if err = hub.renderSearchIndex(sIndex); err != nil {
+	// Render search.json
+	searchIndex := GenerateSearchIndex(posts)
+	if err = hub.renderSearchIndex(searchIndex); err != nil {
 		return err
 	}
 	return hub.renderGraphData(gd)
