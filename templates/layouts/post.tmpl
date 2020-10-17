@@ -12,29 +12,29 @@
 
 {{- if .Post.Connections}}
     <section class="container link">
-        <h4>Connections</h4>
+        <h3>Connections</h3>
             <ul>
                 {{- range .Post.Connections}}
                     {{- if eq .Slug "index"}}
-                        {{- if $.SitePrefix}}
-                            <li><a href="/{{$.SitePrefix}}">{{.Title}}</a></li>
+                            {{- if $.SitePrefix}}
+                                <li><a href="/{{$.SitePrefix}}">{{.Title}}</a></li>
+                            {{- else}}
+                                <li><a href="/">{{.Title}}</a></li>
+                            {{- end}}
                         {{- else}}
-                            <li><a href="/">{{.Title}}</a></li>
-                        {{- end}}
-                        {{- if $.SitePrefix}}
-                            <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
-                        {{- else}}
-                            <li><a href="/posts/{{.Slug}}.html">{{.Title}}</a></li>
-                        {{- end}}
+                            {{- if $.SitePrefix}}
+                                <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                            {{- else}}
+                                <li><a href="/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                            {{- end}}
                     {{- end}}    
                 {{- end}}
             </ul>
     </section>
 {{- end}}
-<hr>
+
 {{- if .Post.Meta.Tags}}
     <section class="container tags">
-    <super>Tags:</super>
         {{- range $t := .Post.Meta.Tags}}
             <a href="/{{$.SitePrefix}}/tags/{{$t}}.html"><button class='outline'>{{$t}}</button></a>
         {{- end}}

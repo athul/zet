@@ -150,3 +150,18 @@ a:focus {
   color: var(--nc-ac-1);
 }
 
+@media screen and (max-width:900px){
+	navbar{
+		flex-wrap: wrap;
+	}
+	.nav-item:last-child{
+		width:100%;
+		text-align: center;
+	}
+	#fastSearch input{
+		width: 100%;
+	}
+	#searchResults{
+		padding: 0;
+	}
+}
