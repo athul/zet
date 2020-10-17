@@ -9,6 +9,7 @@ body {
   word-break: normal !important;
 }
 
+
 .container {
   max-width: 960px;
   /* background: white; */
@@ -18,21 +19,6 @@ a,
 button {
   cursor: pointer;
 }
-
-/* navbar {
-	margin-top: 5rem;
-}
-
-.nav-item a {
-	color: #797979;
-	text-decoration: none;
-}
-
-.nav-item a:hover {
-	cursor: pointer;
-	color: #4d4a4a;
-	border: none;
-} */
 
 /* === Footer === */
 
@@ -163,3 +149,4 @@ a:focus {
   outline: 0;
   color: var(--nc-ac-1);
 }
+
