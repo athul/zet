@@ -39,7 +39,6 @@ func MakeGraphData(posts []pipeline.Post, graph *graph.Mutable) GraphData {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-
 	// Loop over the graph and add nodes & edges
 	for i := 0; i < len(posts); i++ {
 		p := posts[i]
