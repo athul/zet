@@ -2,7 +2,7 @@
 <footer class="horizontal-align">
 <p>Made with <span style="color: #e25555;">&#9829;</span> by
     <a id="footer-link" href="https://github.com/athul/zettel" target="blank">
-    <span id="footer-link-text">zettel++</span>
+    <span id="footer-link-text">customized zettel</span>
     </a>
 </p>
 </footer>
@@ -84,9 +84,9 @@ function executeSearch(term) {
     searchitems = '';
   } else { 
     for (let item in results.slice(0,5)) { 
-    const title = results[item].title.replace(new RegExp(term, "gi"), (match) => `<mark>${match}</mark>`);
+    const title = results[item].title.replace(new RegExp(term, "gi"), (match) => `<mark class="searchHgl">${match}</mark>`);
     tags = results[item].tags.map((value)=>{
-      return value.replace(new RegExp(term, "gi"), (match) => `<mark>${match}</mark>`);
+      return value.replace(new RegExp(term, "gi"), (match) => `<mark class="searchHgl">${match}</mark>`);
     })
     searchitems = searchitems + '<li><a href="' + baseURL + '/' + results[item].permalink + '" tabindex="0"><span class="title">' + title + "</span> — " + tags + "</a></li>";
     }

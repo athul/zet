@@ -1,6 +1,6 @@
 env:
   - CGO_ENABLED=0
-  - RELEASE_BUILDS=dist/zettel_linux_amd64/zettel dist/zettel_linux_arm64/zettel 
+  - RELEASE_BUILDS=dist/zet_linux_amd64/zettel dist/zet_linux_arm64/zettel 
 builds:
   - binary: zettel
     goos:

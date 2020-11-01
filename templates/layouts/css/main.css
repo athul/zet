@@ -165,3 +165,7 @@ a:focus {
 		padding: 0;
 	}
 }
+.searchHgl{
+  padding: 0;
+  background: rgba(121, 40, 202, 0.6);
+}
