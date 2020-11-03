@@ -15,6 +15,7 @@ type Metadata struct {
 // Link is the link given to another post.
 type Link struct {
 	Title, Slug string
+	Tags        []string
 }
 
 // Post contains all the necessary things to render a post.
