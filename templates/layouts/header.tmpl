@@ -13,8 +13,10 @@
     <!-- Link to CSS -->
     {{ if .SitePrefix}}
     <link rel="stylesheet" type="text/css" href="/{{.SitePrefix}}/css/main.css" />
+    <link rel="stylesheet" href="/{{.SitePrefix}}/css/balloon.min.css">
     {{else}}
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/balloon.min.css">
     {{end}}
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
@@ -25,5 +27,6 @@
     onload="renderMathInElement(document.body);"></script>
     <!-- Load Search script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
+    
 </head>
 {{- end }}

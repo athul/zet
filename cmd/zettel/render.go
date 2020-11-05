@@ -68,6 +68,7 @@ func (hub *Hub) renderTag(tag string, posts []pipeline.Post, isAllPosts bool) er
 		l := pipeline.Link{
 			Slug:  strings.TrimSuffix(path.Base(p.FilePath), ".md"),
 			Title: p.Meta.Title,
+			Tags:  p.Meta.Tags,
 		}
 		links = append(links, l)
 	}

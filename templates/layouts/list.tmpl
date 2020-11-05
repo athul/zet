@@ -10,7 +10,8 @@
             <h2>{{ .TagName }}</h2>
         </section>
         <section class="container link">
-            <ul>
+            <section>
+            <div class="notes">
             {{- range .Links}}
                 {{- if eq .Slug "index"}}
                     {{- if $.SitePrefix}}
@@ -20,13 +21,16 @@
                     {{- end}}
                 {{- else}}
                     {{- if $.SitePrefix}}
-                        <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                        <div class="note">
+                        <a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a><br/> {{- range $t := .Tags}}<span class="badge"><a href="/{{$.SitePrefix}}/tags/{{$t}}.html">{{$t}}</a></span>{{- end}}
+                        </div>
                     {{- else}}
-                        <li><a href="/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                        <div class="note"><a href="/posts/{{.Slug}}.html">{{.Title}}</a></div>
                     {{- end}}
                 {{- end}} 
             {{- end}}
-            </ul>
+            </div>
+            </section>
         </section>
          </div>
          {{- template "footer" . }}
