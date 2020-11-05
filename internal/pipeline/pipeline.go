@@ -13,6 +13,7 @@ import (
 	mathjax "github.com/athul/goldmark-mathjax"
 	"github.com/yourbasic/graph"
 	"github.com/yuin/goldmark"
+	emoji "github.com/yuin/goldmark-emoji"
 	highlighting "github.com/yuin/goldmark-highlighting"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/renderer/html"
@@ -101,10 +102,19 @@ func ReplaceLinks(posts []Post, sitePrefix string) error {
 				return fmt.Errorf("link to an invalid slug: %s", sg)
 			}
 			var link string
+
 			if sitePrefix != "" {
-				link = fmt.Sprintf(`[%s](/%s/posts/%s.html)`, meta.Title, sitePrefix, sg)
+				if meta.Summary != "" {
+					link = fmt.Sprintf(`<a data-balloon-length="large" aria-label="%s" class="Innerbacklink" href="/%s/posts/%s.html" data-balloon-pos="up">%s</a>`, meta.Summary, sitePrefix, sg, meta.Title)
+				} else {
+					link = fmt.Sprintf(`<a class="Innerbacklink" href="/%s/posts/%s.html">%s</a>`, sitePrefix, sg, meta.Title)
+				}
 			} else {
-				link = fmt.Sprintf(`[%s](/posts/%s.html)`, meta.Title, sg)
+				if meta.Summary != "" {
+					link = fmt.Sprintf(`<a data-balloon-length="large" aria-label="%s" class="Innerbacklink" href="/posts/%s.html" data-balloon-pos="up">%s</a>`, meta.Summary, sg, meta.Title)
+				} else {
+					link = fmt.Sprintf(`<a class="Innerbacklink" href="/posts/%s.html">%s</a>`, sg, meta.Title)
+				}
 			}
 
 			// Replace the slug with a link
@@ -125,7 +135,9 @@ func ConvertMarkdownToHTML(posts []Post, syntaxStyle string) error {
 	md := goldmark.New(
 		goldmark.WithExtensions(
 			extension.GFM,
+			emoji.Emoji,
 			mathjax.MathJax,
+			extension.Footnote,
 			highlighting.NewHighlighting(
 				highlighting.WithStyle(syntaxStyle),
 			),

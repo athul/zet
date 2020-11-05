@@ -6,10 +6,11 @@ import (
 
 // Metadata contains the metadata extracted from the frontmatter of the post.
 type Metadata struct {
-	Date  time.Time `yaml:"date"`
-	Tags  []string  `yaml:"tags"`
-	Title string    `yaml:"title"`
-	Draft bool      `yaml:"draft"`
+	Date    time.Time `yaml:"date"`
+	Tags    []string  `yaml:"tags"`
+	Title   string    `yaml:"title"`
+	Draft   bool      `yaml:"draft"`
+	Summary string    `yaml:"summary"`
 }
 
 // Link is the link given to another post.

@@ -22,7 +22,7 @@
                 {{- else}}
                     {{- if $.SitePrefix}}
                         <div class="note">
-                        <a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a><br/> {{- range $t := .Tags}}<a href="/{{$.SitePrefix}}/tags/{{$t}}.html">{{$t}}</a>|{{- end}}
+                        <a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a><br/> {{- range $t := .Tags}}<span class="badge"><a href="/{{$.SitePrefix}}/tags/{{$t}}.html">{{$t}}</a></span>{{- end}}
                         </div>
                     {{- else}}
                         <div class="note"><a href="/posts/{{.Slug}}.html">{{.Title}}</a></div>

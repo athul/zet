@@ -9,7 +9,6 @@ body {
   word-break: normal !important;
 }
 
-
 .container {
   max-width: 960px;
   /* background: white; */
@@ -17,6 +16,7 @@ body {
 
 a,
 button {
+  display: inline-block;
   cursor: pointer;
 }
 
@@ -150,33 +150,33 @@ a:focus {
   color: var(--nc-ac-1);
 }
 
-@media screen and (max-width:900px){
-	navbar{
-		flex-wrap: wrap;
-	}
-	.nav-item:last-child{
-		width:100%;
-		text-align: center;
-	}
-	#fastSearch input{
-		width: 100%;
-	}
-	#searchResults{
-		padding: 0;
-	}
+@media screen and (max-width: 900px) {
+  navbar {
+    flex-wrap: wrap;
+  }
+  .nav-item:last-child {
+    width: 100%;
+    text-align: center;
+  }
+  #fastSearch input {
+    width: 100%;
+  }
+  #searchResults {
+    padding: 0;
+  }
 }
-.searchHgl{
+.searchHgl {
   padding: 0;
   background: rgba(121, 40, 202, 0.6);
 }
-.notes{
+.notes {
   display: flex;
   flex-flow: row wrap;
   -webkit-box-pack: center;
   justify-content: center;
   margin-top: 2em;
 }
-.note{
+.note {
   border: 1px solid var(--nc-ac-1);
   margin: 0px 1em 1em auto;
   clear: both;
@@ -186,4 +186,25 @@ a:focus {
   width: 270px;
   padding: 1em 1.2em;
   transition: all 400ms ease-in-out 0s;
+}
+.badge {
+  font-size: 0.8rem;
+  border-radius: 3px;
+  position: relative;
+  top: 0;
+  padding: 1px 3px 1px 3px;
+  background: #1f1f1f;
+  text-shadow: none !important;
+  white-space: nowrap;
+  font-weight: 700;
+  margin: 2px;
+}
+.badge > a {
+  text-decoration: none;
+}
+.Innerbacklink {
+  text-decoration: none;
+  color: orange;
+  --balloon-color:rebeccapurple;
+  --balloon-font-size: 12px;
 }

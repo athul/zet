@@ -26,6 +26,10 @@
 - Generate **Connections** between notes with a simple syntax.
 - Visualise all the connections with a Graph UI.
 - No `$EDITOR` dependency. The markdown notes work same everywhere!
+- SYntax Highlighting
+- Math Support
+- Search  **NEW**
+- Preview Popups **NEW**
 
 ## Documentation
 
@@ -41,7 +45,10 @@ These amazing FOSS projects helped us build `zettel`. If you liked `zettel`, con
 - [yourbasic/graph](https://github.com/yourbasic/graph)
 - [yuin/goldmark](https://github.com/yuin/goldmark)
 - [Sigma JS](http://sigmajs.org/)
-- [Wing CSS](https://github.com/kbrsh/wing)
+- [New CSS](https://newcss.net)
+- [Baloon CSS](https://kazzkiq.github.io/balloon.css/)
+- [Fuze Js](https://fusejs.io/)
+- [Katex](https://katex.org/) 
 
 ## ⭐️ Show your support
 
