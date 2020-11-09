@@ -3,7 +3,6 @@
 {{- if not .IsIndex}}
 <section class="meta container">
     <h2>{{.Post.Meta.Title}}</h2>
-    <p class="date">Posted at — {{.Post.Meta.Date}}</p>
 </section>
 {{- end}}
 <section class="container">
@@ -23,9 +22,13 @@
                             {{- end}}
                         {{- else}}
                             {{- if $.SitePrefix}}
-                                <li><a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                                <li>
+                                <a class="Innerbacklink" href="/{{$.SitePrefix}}/posts/{{.Slug}}.html" >{{.Title}}</a>
+                                </li>
                             {{- else}}
-                                <li><a href="/posts/{{.Slug}}.html">{{.Title}}</a></li>
+                                <li>
+                                <a class="Innerbacklink" href="/posts/{{.Slug}}.html">{{.Title}}</a>
+                                </li>
                             {{- end}}
                     {{- end}}    
                 {{- end}}

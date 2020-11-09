@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/hackstream/zettel/internal/pipeline"
+	"github.com/athul/zet/internal/pipeline"
 )
 
 // PostData holds the data of a Post. Used for Indexing in Search. Has 3 keys,

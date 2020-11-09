@@ -25,7 +25,9 @@
                         <a href="/{{$.SitePrefix}}/posts/{{.Slug}}.html">{{.Title}}</a><br/> {{- range $t := .Tags}}<span class="badge"><a href="/{{$.SitePrefix}}/tags/{{$t}}.html">{{$t}}</a></span>{{- end}}
                         </div>
                     {{- else}}
-                        <div class="note"><a href="/posts/{{.Slug}}.html">{{.Title}}</a></div>
+                        <div class="note">
+                        <a href="/posts/{{.Slug}}.html">{{.Title}}</a><br/>{{- range $t := .Tags}}<span class="badge"><a href="/tags/{{$t}}.html">{{$t}}</a></span>{{- end}}
+                        </div>
                     {{- end}}
                 {{- end}} 
             {{- end}}

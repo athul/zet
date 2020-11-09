@@ -1,4 +1,4 @@
-module github.com/hackstream/zettel
+module github.com/athul/zet
 
 go 1.15
 

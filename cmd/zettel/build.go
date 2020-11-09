@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/hackstream/zettel/internal/pipeline"
+	"github.com/athul/zet/internal/pipeline"
 	"github.com/urfave/cli/v2"
 )
 

@@ -1,7 +1,7 @@
 {{ define "footer" }}
 <footer class="horizontal-align">
 <p>Made with <span style="color: #e25555;">&#9829;</span> by customized
-    <a id="footer-link" href="https://github.com/hackstream/zettel" target="blank">
+    <a id="footer-link" href="https://github.com/athul/zet" target="blank">
     <span id="footer-link-text"> zettel</span>
     </a>
 </p>
@@ -16,11 +16,12 @@ var last = list.lastChild;
 var maininput = document.getElementById('searchInput'); 
 var resultsAvailable = false; 
 var baseURL = window.location.pathname.split("/")[1]
-if (baseURL.length === 0 || baseURL.includes("html")) {
+if (baseURL.length === 0 || baseURL.includes("html") || baseURL.includes("posts")) {
     baseURL = window.location.origin
 } else {
     baseURL = "/" + baseURL
 }
+console.log(baseURL)
 loadSearch()
 document.addEventListener('keydown', function(event) {
   if (event.keyCode == 27) {

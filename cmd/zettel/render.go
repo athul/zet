@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/hackstream/zettel/internal/pipeline"
+	"github.com/athul/zet/internal/pipeline"
 )
 
 func (hub *Hub) renderIndex(post pipeline.Post) error {

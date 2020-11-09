@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/urfave/cli/v2"
 )
@@ -32,7 +31,6 @@ func (hub *Hub) newPost(cliCtx *cli.Context) error {
 	title := cliCtx.Args().First()
 	// fill basic metadata
 	var cfg = map[string]interface{}{
-		"Date":  time.Now().Format(time.RFC3339),
 		"Title": title,
 	}
 	// clean up title

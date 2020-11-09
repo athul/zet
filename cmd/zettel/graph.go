@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/hackstream/zettel/internal/pipeline"
+	"github.com/athul/zet/internal/pipeline"
 	"github.com/yourbasic/graph"
 )
 
