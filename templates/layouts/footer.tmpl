@@ -31,7 +31,6 @@ document.addEventListener('keydown', function(event) {
   }
   if (event.keyCode == 40) {
     if (resultsAvailable) {
-      ;
       event.preventDefault(); 
       if ( document.activeElement == maininput) { first.focus(); } 
       else if ( document.activeElement == last ) { last.focus(); } 
@@ -70,9 +69,9 @@ function loadSearch() {
       shouldSort: true,
       location: 0,
       distance: 100,
-      threshold: 0.4,
-      minMatchCharLength: 2,
-      keys: ['title','tags']
+      threshold: 0.3,
+      minMatchCharLength: 1,
+      keys: [{name:'title',weight:1},{name:'tags',weight:0.3}]
     };
     fuse = new Fuse(data, options); 
   });
@@ -85,12 +84,16 @@ function executeSearch(term) {
     searchitems = '';
   } else { 
     for (let item in results.slice(0,5)) { 
+    const tags = results[item].tags
     const title = results[item].title.replace(new RegExp(term, "gi"), (match) => `<mark class="searchHgl">${match}</mark>`);
-    tags = results[item].tags.map((value)=>{
+    if (Array.isArray(tags) && tags.length){ // Check if any tags are present or not
+      hltags = results[item].tags.map((value)=>{
       return value.replace(new RegExp(term, "gi"), (match) => `<mark class="searchHgl">${match}</mark>`);
     })
-    searchitems = searchitems + '<li><a href="' + baseURL + '/' + results[item].permalink + '" tabindex="0"><span class="title">' + title + "</span> — " + tags + "</a></li>";
-    }
+    searchitems = searchitems + '<li><a href="' + baseURL + '/' + results[item].permalink + '" tabindex="0"><span class="title">' + title + "</span> — " + hltags + "</a></li>";
+    }else{
+    searchitems = searchitems + '<li><a href="' + baseURL + '/' + results[item].permalink + '" tabindex="0"><span class="title">' + title + "</a></li>";
+    }}
     resultsAvailable = true;
   }
   document.getElementById("searchResults").innerHTML = searchitems;

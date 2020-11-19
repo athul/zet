@@ -17,6 +17,17 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js" integrity="sha512-4+XX9O3GEcpTWGNW7m3w/ORF91L4zUX01/U3wAoWIXp1P+LRBEqutZdQIFUeHSa0cJRZ9LPM+GOWus8h8TlYhg==" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.parsers.json.min.js" integrity="sha512-uhhcXJvqfQpnVqJRyCs49Ddt16zZ35qFokRiVOZei14sbMdMS9vtubrb1QQvGJ/zQhQbCttBvVJqqiZHrsHo1g==" crossorigin="anonymous"></script>
    <script>
+   sigma.classes.graph.addMethod('neighbors', function(nodeId) {
+    var k,
+        neighbors = {},
+        index = this.allNeighborsIndex[nodeId] || {};
+
+    for (k in index)
+      neighbors[k] = this.nodesIndex[k];
+
+    return neighbors;
+  });
+
    sigma.parsers.json('data/graph.json', {
       renderer: {
          container: document.getElementById('graphContainer'),
@@ -25,32 +36,53 @@
       container: 'graphContainer',
       settings: {
          defaultNodeColor: '#ec5148',
-         touchEnabled: false,
-         mouseEnabled: true,
          labelThreshold : 5,
-         enableHovering: true,
          singleHover: true,
-         enableEdgeHovering: true,
          defaultHoverLabelBGColor:"black",
          labelHoverBGColor:"default",
          defaultLabelHoverColor:"hotpink",
          labelHoverColor:"default",
       }
-   });
-
-   // Bind the events:
-   sigma.bind('overNode outNode clickNode doubleClickNode rightClickNode', function(e) {
-   console.log(e.type, e.data.node.label, e.data.captor);
-   });
-   sigma.bind('overEdge outEdge clickEdge doubleClickEdge rightClickEdge', function(e) {
-   console.log(e.type, e.data.edge, e.data.captor);
-   });
-   sigma.bind('clickStage', function(e) {
-   console.log(e.type, e.data.captor);
-   });
-   sigma.bind('doubleClickStage rightClickStage', function(e) {
-   console.log(e.type, e.data.captor);
-   });
+   },
+   function(s) {
+        s.graph.nodes().forEach(function(n) {
+          n.originalColor = n.color;
+        });
+        s.graph.edges().forEach(function(e) {
+          e.originalColor = e.color;
+        });
+        s.bind('clickNode', function(e) {
+          var nodeId = e.data.node.id,
+              toKeep = s.graph.neighbors(nodeId);
+          toKeep[nodeId] = e.data.node;
+  
+          s.graph.nodes().forEach(function(n) {
+            if (toKeep[n.id])
+              n.color = n.originalColor;
+            else
+              n.color = '#eee';
+          });
+  
+          s.graph.edges().forEach(function(e) {
+            if (toKeep[e.source] && toKeep[e.target])
+              e.color = e.originalColor;
+            else
+              e.color = '#eee';
+          });
+          s.refresh();
+        });
+        s.bind('clickStage', function(e) {
+          s.graph.nodes().forEach(function(n) {
+            n.color = n.originalColor;
+          });
+  
+          s.graph.edges().forEach(function(e) {
+            e.color = e.originalColor;
+          });
+          s.refresh();
+        });
+      }
+   );
    </script>
 </html>
 {{- end }}

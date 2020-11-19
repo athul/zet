@@ -105,9 +105,9 @@ func ReplaceLinks(posts []Post, sitePrefix string) error {
 
 			if sitePrefix != "" {
 				if meta.Summary != "" {
-					link = fmt.Sprintf(`<a data-balloon-length="large" aria-label="%s" class="Innerbacklink" href="/%s/posts/%s.html" data-balloon-pos="up">%s</a>`, meta.Summary, sitePrefix, sg, meta.Title)
+					link = fmt.Sprintf(`<a data-balloon-length="large" aria-label="%s" class="Innerbacklink" href="/%s/posts/%s.html" data-balloon-pos="up">[[%s]]</a>`, meta.Summary, sitePrefix, sg, meta.Title)
 				} else {
-					link = fmt.Sprintf(`<a class="Innerbacklink" href="/%s/posts/%s.html">%s</a>`, sitePrefix, sg, meta.Title)
+					link = fmt.Sprintf(`<a class="Innerbacklink" href="/%s/posts/%s.html">[[%s]]</a>`, sitePrefix, sg, meta.Title)
 				}
 			} else {
 				if meta.Summary != "" {
