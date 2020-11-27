@@ -3,10 +3,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{.Description}}">
     <meta name="author" content="{{.Author}}">
-    <title>{{.SiteName}}</title>
-
+    {{if or .IsIndex (not .Post.Meta.Title)}}
+    <meta name="description" content="{{.Description}}">
+    <title>{{ .SiteName}}</title>
+    {{else if .Post.Meta.Title}}
+    <meta name="description" {{if .Post.Meta.Summary}}content="{{.Post.Meta.Summary}}"{{else}}content="{{.Description}}"{{end}}>
+    <title>{{ .Post.Meta.Title}}</title>
+    {{end}}
     <!-- Link to Favicon -->
     <link rel="icon" type="image/png" href="images/memo.png"/>
     <link rel="icon" type="image/png" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/memo_1f4dd.png"/>
