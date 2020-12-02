@@ -18,9 +18,11 @@
     {{ if .SitePrefix}}
     <link rel="stylesheet" type="text/css" href="/{{.SitePrefix}}/css/main.css" />
     <link rel="stylesheet" href="/{{.SitePrefix}}/css/balloon.min.css">
+    <script src="/{{.SitePrefix}}/js/turbolinks.js"></script>
     {{else}}
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link rel="stylesheet" href="/css/balloon.min.css">
+    <script src="/js/turbolinks.js"></script>
     {{end}}
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">

@@ -60,6 +60,10 @@ footer {
   margin: auto;
   background: #fbfbf4;
 }
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: green;
+}
 
 pre {
   border-radius: 4px;

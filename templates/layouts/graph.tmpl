@@ -9,6 +9,9 @@
          <section class="hero container">
             <h2>Graph</h2>
          </section>
+         <blockquote>
+         <b>If the graph isn't rendering, Reload the Page</b>
+         </blockquote>
          <div id="graphContainer"></div>
         </div>
         {{- template "footer" . }}
@@ -38,9 +41,7 @@
          defaultNodeColor: '#ec5148',
          labelThreshold : 5,
          singleHover: true,
-         defaultHoverLabelBGColor:"black",
-         labelHoverBGColor:"default",
-         defaultLabelHoverColor:"hotpink",
+         defaultLabelHoverColor:"red",
          labelHoverColor:"default",
       }
    },
