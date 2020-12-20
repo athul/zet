@@ -60,7 +60,7 @@ func main() {
 	app.Version = fmt.Sprintf("%s, %s", buildVersion, buildDate)
 	app.Authors = []*cli.Author{
 		{
-			Name: "Hackstream Devs",
+			Name: "Hackstream Devs + Athul",
 		},
 	}
 	// Register command line args.
